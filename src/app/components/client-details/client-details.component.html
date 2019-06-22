@@ -7,7 +7,7 @@
   <div class="col-md-6">
     <div class="btn-group pull-right">
       <a routerLink="/client/edit/{{ id }}" class="btn btn-dark" >Edit</a>
-      <button class="btn btn-danger">Delete</button>
+      <button (click)="onDeleteClick()" class="btn btn-danger">Delete</button>
     </div>
   </div>
 </div>
@@ -20,7 +20,30 @@
         <h4>Client ID: {{client.id}}</h4>
       </div>
       <div class="cold-md-8 col-sm-6">
-        @TODO - BALANCE
+        <h3 class="pull-right">
+          Balance
+          <span [class.text.danger]="hasBalance"
+                [class.text.success]=!hasBalance>
+                {{client.balance | currency: "USD": "symbol"}}
+
+          </span>
+          <small>
+            <a (click)= "showBalanceUpdateInput= !showBalanceUpdateInput">
+              <i class="fa fa-pencil"></i>
+            </a>
+          </small>
+        </h3>
+        <div class="clearfix">
+          <form *ngIf="showBalanceUpdateInput" (submit)="updateBalance(id)">
+            <div class="input-group">
+              <input type="text" name="balance" class="form-control"
+              [(ngModel)] ="client.balance">
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-primary ml-3">Update</button>
+              </span>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
     <hr>
