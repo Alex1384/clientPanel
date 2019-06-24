@@ -6,7 +6,7 @@
     <h5 class="text-right text-secondary">Total Owed: {{ totalOwed | currency: "USD": "symbol"}}</h5>
   </div>
 </div>
-<table ng-if="clients?.length > 0; else noClients" class="table table-striped">
+<table *ngIf="clients?.length > 0; else noClients" class="table table-striped">
  <thead class="thead-inverse">
    <tr>
      <th>Name</th>
